@@ -13,8 +13,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
     return Column(
       children: [
         PageView.builder(
+          itemCount: 10,
           itemBuilder: (context, index) {
-            return Container();
+            return Column();
           },
         ),
         Row(

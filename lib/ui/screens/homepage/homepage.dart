@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:survey_app/ui/layouts/base_scaffold.dart';
 import 'package:survey_app/ui/layouts/base_scaffold_body.dart';
 
+import '../question_page/question_screen.dart';
+
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
 
@@ -20,8 +22,15 @@ class Homepage extends StatelessWidget {
               ],
             ),
             Row(
-              children: const [
-                Text('Finance'),
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QuestionScreen()));
+                    },
+                    child: Text('Finance')),
                 Text('Entertainment'),
               ],
             ),
