@@ -11,5 +11,5 @@ class QuestionModel {
     this.isAnswered,
   });
 
-  List<QuestionModel> questionDummy = [];
+  static List<QuestionModel> questionDummy = [];
 }
