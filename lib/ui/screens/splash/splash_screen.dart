@@ -33,6 +33,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: const [
+        Text(
+          'Hello, there\n Glad to have you here',
+        ),
+        //TODO: add corresponding picture,
+      ],
+    );
   }
 }

@@ -8,26 +8,36 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  final pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        PageView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Column();
-          },
+        //TODO: Add a linear progress indicator, delete later
+        const LinearProgressIndicator(),
+        Expanded(
+          child: PageView.builder(
+            itemCount: 10,
+            onPageChanged: (index) {},
+            pageSnapping: true,
+            controller: pageController,
+            itemBuilder: (context, index) {
+              return Column();
+            },
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton(
               onPressed: () {},
-              child: Text('Previous'),
+              child: const Text('Previous'),
             ),
             TextButton(
               onPressed: () {},
-              child: Text('Next'),
+              child: const Text('Next'),
             ),
           ],
         )
