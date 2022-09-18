@@ -3,7 +3,6 @@ import 'package:survey_app/ui/styles/dimens.dart';
 
 class BaseScaffoldBody extends StatefulWidget {
   final Widget child;
-
   const BaseScaffoldBody({Key? key, required this.child}) : super(key: key);
 
   @override
