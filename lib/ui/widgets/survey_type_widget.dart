@@ -25,13 +25,18 @@ class SurveyTypeWidget extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
                 color: Colors.black26,
-                offset: Offset(2, 4),
-                blurRadius: 1,
-                spreadRadius: 1)
+                offset: Offset(2, 2),
+                blurRadius: .5,
+                spreadRadius: .5)
           ],
         ),
         margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 2),
+        padding: const EdgeInsets.only(
+          top: 7,
+          bottom: 7,
+          left: 5,
+          right: 24,
+        ),
         child: Row(
           children: [
             Image.network(
@@ -40,27 +45,29 @@ class SurveyTypeWidget extends StatelessWidget {
               width: 50,
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label ?? 'Survey',
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  subtitle ?? 'Take a survey',
-                  softWrap: true,
-                  maxLines: 2,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12),
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label ?? 'Survey',
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    subtitle ?? 'Take a survey',
+                    softWrap: true,
+                    maxLines: 2,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12),
+                  ),
+                ],
+              ),
             )
           ],
         ),

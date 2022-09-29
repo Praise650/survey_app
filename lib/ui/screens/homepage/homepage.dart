@@ -15,52 +15,67 @@ class Homepage extends StatelessWidget {
         "/Lorem-ipsum-011.jpg?width=620&quality=85&fit=max&s=48a5c92436d831392306b23d62875a7c";
     return SafeArea(
       child: BaseScaffold(
-        body: BaseScaffoldBody(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SurveyTypeWidget(
-                url: url,
-                onPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const QuestionScreen(),
-                    ),
-                  );
-                },
-              ),
-              const SurveyTypeWidget(
-                url: url,
-                label: 'Quiz',
-                subtitle: 'Answer questions to test your knowledge',
-              ),
-              const SurveyTypeWidget(
-                url: url,
-                label: 'Health',
-                subtitle:
-                    'Answer questions related to Health to test your knowledge',
-              ),
-              const SurveyTypeWidget(
-                url: url,
-                label: 'Sport',
-                subtitle:
-                    'Answer questions related to Sports to test your knowledge',
-              ),
-              const SurveyTypeWidget(
-                url: url,
-                label: 'Finance',
-                subtitle:
-                    'Answer questions related to Finance \nto test your knowledge',
-              ),
-              const SurveyTypeWidget(
-                url: url,
-                label: 'Entertainment',
-                subtitle:
-                    'Answer questions related to entertainment \nto test your knowledge',
-              ),
-            ],
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blue, Colors.deepPurple],
+            ),
+          ),
+          child: BaseScaffoldBody(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                SurveyTypeWidget(
+                  url: url,
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QuestionScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const SurveyTypeWidget(
+                  url: url,
+                  label: 'Quiz',
+                  subtitle: 'Answer questions to test your knowledge',
+                ),
+                const SurveyTypeWidget(
+                  url: url,
+                  label: 'Health',
+                  subtitle:
+                      'Answer questions related to Health to test your knowledge',
+                ),
+                const SurveyTypeWidget(
+                  url: url,
+                  label: 'Sport',
+                  subtitle:
+                      'Answer questions related to Sports to test your knowledge',
+                ),
+                const SurveyTypeWidget(
+                  url: url,
+                  label: 'Finance',
+                  subtitle:
+                      'Answer questions related to Finance to test your knowledge',
+                ),
+                const SurveyTypeWidget(
+                  url: url,
+                  label: 'Entertainment',
+                  subtitle:
+                      'Answer questions related to entertainment to test your knowledge',
+                ),
+                const SurveyTypeWidget(
+                  url: url,
+                  label: 'Entertainment',
+                  subtitle:
+                      'Answer questions related to entertainment to test your knowledge',
+                ),
+              ],
+            ),
           ),
         ),
       ),
