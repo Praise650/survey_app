@@ -9,7 +9,7 @@ class BaseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: body,
     );
   }
