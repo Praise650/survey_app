@@ -20,7 +20,7 @@ class BaseQuestion {
     if (questionNumber < _questionModel.length - 1) {
       return questionNumber++;
     } else {
-      return _questionModel.length;
+      return _questionModel.length - 1;
     }
   }
 
