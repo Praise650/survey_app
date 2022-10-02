@@ -17,7 +17,13 @@ class QuestionScreenViewModel extends ChangeNotifier {
     return baseQuestion.previousQuestion();
   }
 
+  String? get question => baseQuestion.question;
+
   int nextQuestion() {
     return baseQuestion.nextQuestion();
   }
+
+  int get currentQuestion => baseQuestion.questionNumber;
+//TODO: implement setter for current question
+
 }

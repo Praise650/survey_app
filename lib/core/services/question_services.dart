@@ -5,6 +5,8 @@ class BaseQuestion {
 
   List get questionModel => _questionModel;
 
+  String? get question => _questionModel[questionNumber].question;
+
   int get questionLength => _questionModel.length;
   int questionNumber = 0;
 
