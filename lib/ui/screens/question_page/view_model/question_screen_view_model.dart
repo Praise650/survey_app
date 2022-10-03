@@ -1,29 +1,50 @@
 import 'package:flutter/cupertino.dart';
-import 'package:survey_app/core/models/question/question_model.dart';
 
+import '../../../../core/models/question/question_model.dart';
 import '../../../../core/services/question_services.dart';
 
 class QuestionScreenViewModel extends ChangeNotifier {
   BaseQuestion baseQuestion = BaseQuestion();
 
-  int selectedIndex = 0;
-
-  update(int index) {
-    selectedIndex = index;
-    notifyListeners();
-  }
-
-  bool previousQuestion() {
-    return baseQuestion.previousQuestion();
-  }
+  // int selectedIndex = 0;
 
   String? get question => baseQuestion.question;
 
-  int nextQuestion() {
-    return baseQuestion.nextQuestion();
+  int get currentQuestion => baseQuestion.questionNumber;
+
+  List<String>? get options => baseQuestion.options;
+
+  String? get answered => baseQuestion.answered;
+
+  bool? get isAnswered => baseQuestion.isAnswered;
+
+  int? get optionLength => baseQuestion.optionsLength;
+
+  // bool isActive = false;
+
+  // update(int index) {
+  //   selectedIndex = index;
+  //   notifyListeners();
+  // }
+
+  previousQuestion(PageController controller) {
+    return controller.animateToPage((baseQuestion.previousQuestion()),
+        duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
   }
 
-  int get currentQuestion => baseQuestion.questionNumber;
-//TODO: implement setter for current question
+  Future<void> nextQuestion(PageController controller) {
+    return controller.animateToPage((baseQuestion.nextQuestion()),
+        duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
+  }
 
+  void updateQuestion(int value) {
+    baseQuestion.questionNumber = value;
+    notifyListeners();
+  }
+
+  updateChecked(QuestionModel questionModel) {
+    print('object' 'he');
+    questionModel.updateCheckbox;
+    notifyListeners();
+  }
 }

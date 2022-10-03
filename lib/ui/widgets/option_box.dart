@@ -2,48 +2,67 @@ import 'package:flutter/material.dart';
 
 class OptionBox extends StatelessWidget {
   final String? text;
+  final bool isAnswered;
 
-  const OptionBox({Key? key, this.text}) : super(key: key);
+  final Function()? onPress;
+
+  const OptionBox({
+    Key? key,
+    this.text,
+    required this.isAnswered,
+    this.onPress,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.green,
-          style: BorderStyle.solid,
-          width: 2,
+    return GestureDetector(
+      onTap: () => onPress,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: isAnswered == true
+              ? Border.all(
+                  color: Colors.green,
+                  style: BorderStyle.solid,
+                  width: 2,
+                )
+              : Border.all(
+                  color: Colors.transparent,
+                  style: BorderStyle.none,
+                  width: 0,
+                ),
         ),
-      ),
-      margin: const EdgeInsets.only(top: 10),
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(text ?? 'NO OPTION'),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                    color: Colors.black26,
-                    offset: Offset(1, 1),
-                    blurRadius: 1,
-                    spreadRadius: 1)
-              ],
-            ),
-            child: const CircleAvatar(
-              radius: 10,
-              child: Icon(
-                Icons.done,
-                color: Colors.white,
-                size: 12,
+        margin: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(text ?? 'NO OPTION'),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(1, 1),
+                      blurRadius: 1,
+                      spreadRadius: 1)
+                ],
               ),
-            ),
-          )
-        ],
+              child: isAnswered == true
+                  ? const CircleAvatar(
+                      radius: 10,
+                      child: Icon(
+                        Icons.done,
+                        color: Colors.white,
+                        size: 12,
+                      ),
+                    )
+                  : const SizedBox(),
+            )
+          ],
+        ),
       ),
     );
   }

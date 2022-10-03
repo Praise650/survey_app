@@ -25,19 +25,15 @@ class Homepage extends StatelessWidget {
           child: BaseScaffoldBody(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 50,
-                ),
+                const SizedBox(height: 50),
                 SurveyTypeWidget(
                   url: url,
-                  onPress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const QuestionScreen(),
-                      ),
-                    );
-                  },
+                  onPress: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QuestionScreen(),
+                    ),
+                  ),
                 ),
                 const SurveyTypeWidget(
                   url: url,

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../homepage/homepage.dart';
@@ -15,14 +17,12 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 3),
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Homepage(),
-          ),
-        );
-      },
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homepage(),
+        ),
+      ),
     );
   }
 
@@ -33,8 +33,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.deepPurple],
+          ),
+        ),
+        // color: Colors.red,
+        alignment: Alignment.center,
+        child: const Text(
+          'Welcome to Sorvaay',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 24,
+          ),
+        ),
+      ),
     );
   }
 }
