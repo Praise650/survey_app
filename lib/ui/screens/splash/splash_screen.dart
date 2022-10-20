@@ -43,11 +43,12 @@ class _SplashScreenState extends State<SplashScreen> {
         // color: Colors.red,
         alignment: Alignment.center,
         child: const Text(
-          'Welcome to Sorvaay',
+          //TODO:add 'Welcome to Sorvaay' to  app bar of homepage
+          'Sorvaay',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w700,
-            fontSize: 24,
+            fontSize: 38,
           ),
         ),
       ),
