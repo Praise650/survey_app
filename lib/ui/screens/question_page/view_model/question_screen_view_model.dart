@@ -6,7 +6,11 @@ import '../../../../core/services/question_services.dart';
 class QuestionScreenViewModel extends ChangeNotifier {
   BaseQuestion baseQuestion = BaseQuestion();
 
-  // int selectedIndex = 0;
+  int selectedOptionIndex = 0;
+
+  List<String> answers = [];
+
+  String _answer = '';
 
   String? get question => baseQuestion.question;
 
@@ -16,9 +20,14 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   String? get answered => baseQuestion.answered;
 
+  void setAnswered(String selectedAnswer) {
+    _answer = selectedAnswer;
+    notifyListeners();
+  }
+
   bool? get isAnswered => baseQuestion.isAnswered;
 
-  int? get optionLength => baseQuestion.optionsLength;
+  int get optionLength => baseQuestion.optionsLength!;
 
   // bool isActive = false;
 
@@ -26,6 +35,12 @@ class QuestionScreenViewModel extends ChangeNotifier {
   //   selectedIndex = index;
   //   notifyListeners();
   // }
+
+  updateSelectedOptions(int index, String selectedAnswer) {
+    selectedOptionIndex = index;
+    baseQuestion.answered = selectedAnswer;
+    notifyListeners();
+  }
 
   previousQuestion(PageController controller) {
     return controller.animateToPage((baseQuestion.previousQuestion()),

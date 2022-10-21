@@ -86,9 +86,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 totalQuestion:
                                     model.baseQuestion.questionLength,
                                 question: model.question.toString(),
-                                // 'Which of this is true about Real Estate Management  '
-                                // 'and Investment in the year 1844 and accepted by over 200 Countries in '
-                                // 'our modern age and time',
                               ),
                               model.options == null
                                   ? Column(
@@ -96,26 +93,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                         TextField(
                                           decoration: InputDecoration(
                                             hintText: 'Type your answer here',
+                                            hintStyle: TextStyle(
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
                                       ],
                                     )
-                                  : Column(
-                                      children: List.generate(
-                                        model.optionLength ?? 0,
-                                        (optionIndex) => OptionBox(
-                                          text: model.options![optionIndex],
-                                          isAnswered: model.isAnswered!,
-                                          onPress: () => model.updateChecked(
-                                            model.baseQuestion
-                                                .questionModel[optionIndex],
-                                          ),
-                                          // onPress: (){
-                                          //   print('Hello');
-                                          // },
-                                        ),
-                                      ),
-                                    ),
+                                  : const OptionBox(),
                             ],
                           );
                         },
