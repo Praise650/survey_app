@@ -19,7 +19,10 @@ class OptionBox extends StatelessWidget {
         children: List.generate(
           model.optionLength,
           (index) => GestureDetector(
-            onTap: () => model.updateSelectedOptions(index),
+            onTap: () => model.updateSelectedOptions(
+              index,
+              model.options![index],
+            ),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,

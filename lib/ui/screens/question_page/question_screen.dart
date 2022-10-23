@@ -106,9 +106,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         },
                       ),
                     ),
-                    BaseButton(
-                      onPress: () => model.nextQuestion(controller!),
-                    ),
+                    BaseButton(onPress: () {
+                      model.nextQuestion(controller!);
+                      print(model.answer);
+                    }),
                   ],
                 ),
               ),

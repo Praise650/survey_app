@@ -11,6 +11,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
   List<String> answers = [];
 
   String _answer = '';
+  String? get answer => _answer;
 
   String? get question => baseQuestion.question;
 
@@ -38,7 +39,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   updateSelectedOptions(int index, String selectedAnswer) {
     selectedOptionIndex = index;
-    baseQuestion.answered = selectedAnswer;
+    _answer = selectedAnswer;
     notifyListeners();
   }
 
