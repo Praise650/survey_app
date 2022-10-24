@@ -57,13 +57,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      color: model.currentQuestion == 1
-                          ? Colors.grey
-                          : Colors.yellow,
+                      decoration: BoxDecoration(
+                          color: model.currentQuestion == 1
+                              ? Colors.grey
+                              : Colors.yellow,
+                          borderRadius: BorderRadius.circular(10)),
                       child: TextButton.icon(
                         onPressed: () => model.previousQuestion(controller!),
                         icon: const Icon(
-                          Icons.west,
+                          Icons.chevron_left,
                           color: Colors.white,
                         ),
                         label: const Text(
@@ -108,7 +110,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                     BaseButton(onPress: () {
                       model.nextQuestion(controller!);
-                      print(model.answer);
+                      model.answers.add(model.answer ?? 'Nothing');
                     }),
                   ],
                 ),

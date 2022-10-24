@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:survey_app/ui/screens/result_page/result_screen.dart';
+
 import '../models/question/question_model.dart';
 
 class BaseQuestion {
@@ -11,23 +14,29 @@ class BaseQuestion {
 
   int? get optionsLength => _questionModel[_questionNumber].options?.length;
 
+  //Get Selected answer
+  int? selectedAnswer;
+
+  ///get question at index
   String? get question => _questionModel[_questionNumber].question;
 
-  String? get answered => _questionModel[_questionNumber].answer;
+  ///get selected answer
+  String? get getAnswer => _questionModel[_questionNumber].getAnswer();
 
-  bool? get isAnswered => _questionModel[_questionNumber].isAnswered;
+  /// set option index
+  int? answered(int selectedOptionIndex) =>
+      _questionModel[_questionNumber].answered = selectedOptionIndex;
 
+  int? get currentOptionIndex => _questionModel[_questionNumber].answered;
+
+
+  ///Display list of options
   List<String>? get options => _questionModel[_questionNumber].options;
 
   List get questionModel => _questionModel;
 
-  set questionNumber(int number) {
-    _questionNumber = number;
-  }
-
-  set isAnswered(bool? value) {
-    _questionModel[_questionNumber].isAnswered = value;
-  }
+  /// set question index
+  set questionNumber(int number) => _questionNumber = number;
 
   int previousQuestion() {
     if (_questionNumber != 0) {
@@ -44,10 +53,6 @@ class BaseQuestion {
       return _questionModel.length;
     }
   }
-
-// updateBool() {
-//   _questionModel[_questionNumber].updateBool();
-// }
 
 // int currentQuestion(int index) {
 //   return index += 1;

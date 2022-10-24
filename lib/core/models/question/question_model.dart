@@ -2,22 +2,20 @@ class QuestionModel {
   final String? question;
   final String? answer;
   final List<String>? options;
-  bool? isAnswered;
+  int? answered;
 
-  updateCheckbox() {
-    isAnswered = !isAnswered!;
-  }
+  String? getAnswer() => answered != null ? options![answered ?? 0] : null;
 
   QuestionModel({
     this.question,
     this.answer,
     this.options,
-    this.isAnswered = false,
+    this.answered,
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
-        options: json['options'],
-        isAnswered: json['isAnswered'],
+    options: json['options'],
+        answered: json['answered'],
         answer: json['answer'],
         question: json['question'],
       );
@@ -83,7 +81,6 @@ class QuestionModel {
     QuestionModel(
       question: 'What other types of people could find our product useful?',
       answer: '',
-      isAnswered: false,
     ),
     QuestionModel(
       question: 'How easy is it to use our product?',

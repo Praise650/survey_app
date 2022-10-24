@@ -19,15 +19,12 @@ class OptionBox extends StatelessWidget {
         children: List.generate(
           model.optionLength,
           (index) => GestureDetector(
-            onTap: () => model.updateSelectedOptions(
-              index,
-              model.options![index],
-            ),
+            onTap: () => model.updateSelectedOptions(index),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                border: model.selectedOptionIndex == index
+                border: model.currentOptionIndex == index
                     ? Border.all(
                         color: Colors.green,
                         style: BorderStyle.solid,
@@ -56,7 +53,7 @@ class OptionBox extends StatelessWidget {
                             spreadRadius: 1)
                       ],
                     ),
-                    child: model.selectedOptionIndex == index
+                    child: model.currentOptionIndex == index
                         ? const CircleAvatar(
                             radius: 10,
                             child: Icon(
