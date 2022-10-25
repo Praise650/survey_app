@@ -34,7 +34,14 @@ class _ResultScreenState extends State<ResultScreen> {
             children: [
               Column(
                 children: List.generate(
-                    10, (index) => const Text('List of answered questions')),
+                  10,
+                  (index) => Column(
+                    children: const [
+                      Text('List of answered questions'),
+                      Text('List of answered questions'),
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               BaseButton(
