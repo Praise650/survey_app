@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:survey_app/ui/screens/result_page/result_screen.dart';
-
 import '../models/question/question_model.dart';
 
 class BaseQuestion {
@@ -46,13 +43,7 @@ class BaseQuestion {
     }
   }
 
-  int nextQuestion() {
-    if (questionNumber < _questionModel.length) {
-      return questionNumber++;
-    } else {
-      return _questionModel.length;
-    }
-  }
+  int nextQuestion() => questionNumber++;
 
 // int currentQuestion(int index) {
 //   return index += 1;

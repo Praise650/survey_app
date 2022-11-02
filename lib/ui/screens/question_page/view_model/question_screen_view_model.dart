@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import '../../../../Navigation/route.dart';
 import '../../../../core/services/question_services.dart';
 
 class QuestionScreenViewModel extends ChangeNotifier {
@@ -30,10 +31,15 @@ class QuestionScreenViewModel extends ChangeNotifier {
         duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
   }
 
-  Future<void> nextQuestion(PageController controller) {
+  Future<void> nextQuestion(PageController controller, BuildContext context) {
     debugPrint('Debug print $answers');
-    return controller.animateToPage((baseQuestion.nextQuestion()),
-        duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
+    if (baseQuestion.questionNumber < baseQuestion.questionLength) {
+      return controller.animateToPage((baseQuestion.nextQuestion()),
+          duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
+    } else {
+      return Navigator.pushNamed(context, RouteManager.resultPage);
+      baseQuestion.questionModel.length;
+    }
   }
 
   void updateQuestion(int value) {

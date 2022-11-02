@@ -14,7 +14,7 @@ class QuestionModel {
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
-    options: json['options'],
+        options: json['options'],
         answered: json['answered'],
         answer: json['answer'],
         question: json['question'],
@@ -115,6 +115,187 @@ class QuestionModel {
     QuestionModel(
       question: 'How could we improve our product to better meet your needs?',
       answer: '',
+    ),
+  ];
+
+  static List<QuestionModel> healthQuestionDummy = [
+    QuestionModel(
+      question: 'Employment Status of respondent:',
+      options: [
+        'Housewife',
+        'Self-employed',
+        'Employed',
+        'Unemployed',
+        'Student',
+      ],
+    ),
+    QuestionModel(
+      question: 'What is your marital status?',
+      options: [
+        "Single",
+        "Married",
+        "Separated",
+        "Divorced",
+        "Widowed/Widower",
+      ],
+    ),
+    QuestionModel(
+      question: 'Highest level of education attained?',
+      options: [
+        "No Formal education",
+        "Primary",
+        "Secondary",
+        "Tertiary",
+      ],
+    ),
+    QuestionModel(
+      question: 'What is your ethnic group?',
+      options: [
+        "Yoruba",
+        "Igbo",
+        "Hausa",
+        "Others",
+      ],
+    ),
+    QuestionModel(
+      question: 'How much do you earn weekly?',
+      options: [
+        "0 - 1000",
+        "1000 - 5000",
+        "5000 - 10000",
+        "10000 - 20000",
+        "20000 and above",
+      ],
+    ),
+    QuestionModel(
+      question: 'Have you ever heard of cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+      ],
+    ),
+    QuestionModel(
+      question: 'Have you ever heard of human papilloma virus (HPV)?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is cervical cancer preventable?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is having many different sexual partners a risk factor?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is smoking a risk for cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is HIV a risk for cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is oral contraception a risk for cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is giving birth to many babies a risk factor?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question:
+          'Is human papilloma virus (HIV) a risk factor for cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question:
+          'Are you more likely to develop cervical cancer if a family member has/had it?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is vaginal bleeding a symptom of cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Is foul smelling a symptom of cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question:
+          'Is experiencing pain during intercourse a symptom of cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'Do you know any method of screening for cervical cancer?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'If yes, is pap smear a method?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
+    ),
+    QuestionModel(
+      question: 'If yes, is visual inspection of cervix a method?',
+      options: [
+        "Yes",
+        "No",
+        "Don't know",
+      ],
     ),
   ];
 // 'Which of this is true about Real Estate Management  '

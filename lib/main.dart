@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Navigation/route.dart';
 import 'ui/screens/question_page/view_model/question_screen_view_model.dart';
 import 'ui/screens/splash/splash_screen.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SplashScreen(),
+        initialRoute: RouteManager.splashScreen,
+        onGenerateRoute: RouteManager.generateRoute,
       ),
     );
   }
