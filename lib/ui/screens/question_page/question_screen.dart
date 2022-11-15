@@ -91,14 +91,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
                               ),
                               model.options == null
                                   ? Column(
-                                      children: const [
-                                        TextField(
-                                          decoration: InputDecoration(
+                                      children: [
+                                        TextFormField(
+                                          decoration: const InputDecoration(
                                             hintText: 'Type your answer here',
                                             hintStyle: TextStyle(
                                               color: Colors.white,
                                             ),
                                           ),
+                                          onSaved: (value) {
+                                            setState(() => model.typedAnswer =
+                                                value ?? '');
+                                          },
                                         ),
                                       ],
                                     )
@@ -111,7 +115,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     BaseButton(
                       onPress: () {
                         model.nextQuestion(controller!, context);
-                        model.answers.add(model.answer ?? 'Nothing');
+                        model.saveAnswer();
                       },
                     ),
                   ],

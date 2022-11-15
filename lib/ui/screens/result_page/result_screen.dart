@@ -7,7 +7,8 @@ import 'package:survey_app/ui/widgets/buttons/base_button.dart';
 import '../../styles/deorations.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({Key? key}) : super(key: key);
+  const ResultScreen({Key? key, this.result}) : super(key: key);
+  final List<String>? result;
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -34,11 +35,10 @@ class _ResultScreenState extends State<ResultScreen> {
             children: [
               Column(
                 children: List.generate(
-                  10,
+                  widget.result!.length,
                   (index) => Column(
-                    children: const [
-                      Text('List of answered questions'),
-                      Text('List of answered questions'),
+                    children: [
+                      Text(widget.result![index]),
                     ],
                   ),
                 ),

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import '../../../../Navigation/route.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/services/question_services.dart';
+import '../../result_page/result_screen.dart';
 
 class QuestionScreenViewModel extends ChangeNotifier {
   BaseQuestion baseQuestion = BaseQuestion();
@@ -9,6 +9,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   ///store selected answer
   String? get answer => baseQuestion.getAnswer;
+  String typedAnswer = '';
 
   String? get question => baseQuestion.question;
 
@@ -19,9 +20,19 @@ class QuestionScreenViewModel extends ChangeNotifier {
   int get optionLength => baseQuestion.optionsLength!;
 
   updateSelectedOptions(int index) {
-    print(answer);
+    debugPrint(answer);
     baseQuestion.answered(index);
     notifyListeners();
+  }
+
+  saveAnswer() {
+    if (options != null) {
+      answers.add(answer ?? 'Nothing');
+      notifyListeners();
+    } else {
+      answers.add(typedAnswer);
+      notifyListeners();
+    }
   }
 
   int? get currentOptionIndex => baseQuestion.currentOptionIndex;
@@ -37,8 +48,16 @@ class QuestionScreenViewModel extends ChangeNotifier {
       return controller.animateToPage((baseQuestion.nextQuestion()),
           duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
     } else {
-      return Navigator.pushNamed(context, RouteManager.resultPage);
-      baseQuestion.questionModel.length;
+      return Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(
+            result: answers,
+          ),
+        ),
+      );
+      // Navigator.pushNamed(context, RouteManager.resultPage);
+      // baseQuestion.questionModel.length;
     }
   }
 
