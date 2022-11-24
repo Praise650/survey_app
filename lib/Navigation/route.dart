@@ -7,7 +7,7 @@ import 'package:survey_app/ui/screens/splash/splash_screen.dart';
 class RouteManager {
   static const String splashScreen = '/';
   static const String loginPage = '/loginPage';
-  static const String startingPage = '/startingPage';
+  static const String homePage = '/homePage';
   static const String questionPage = '/questionPage';
   static const String resultPage = '/resultPage';
 
@@ -17,7 +17,7 @@ class RouteManager {
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
         );
-      case loginPage:
+      case homePage:
         return MaterialPageRoute(
           builder: (context) => const Homepage(),
         );
@@ -27,7 +27,10 @@ class RouteManager {
         );
       case resultPage:
         return MaterialPageRoute(
-          builder: (context) => const ResultScreen(),
+          builder: (context) => ResultScreen(
+            result: settings.arguments as List<String>?,
+          ),
+          settings: settings,
         );
       default:
         throw const FormatException('Route not found!, check routes again');

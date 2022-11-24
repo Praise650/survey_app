@@ -96,12 +96,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                           decoration: const InputDecoration(
                                             hintText: 'Type your answer here',
                                             hintStyle: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.blue,
+                                            ),
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            labelText: 'Type your answer here',
+                                            labelStyle: TextStyle(
+                                              color: Colors.blue,
                                             ),
                                           ),
                                           onSaved: (value) {
                                             setState(() => model.typedAnswer =
-                                                value ?? '');
+                                                value ?? 'Default Answer');
                                           },
                                         ),
                                       ],
@@ -115,7 +121,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     BaseButton(
                       onPress: () {
                         model.nextQuestion(controller!, context);
-                        model.saveAnswer();
+                        // model.saveAnswer();
                       },
                     ),
                   ],

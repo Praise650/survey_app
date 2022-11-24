@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:survey_app/Navigation/route.dart';
 import '../../../../core/services/question_services.dart';
-import '../../result_page/result_screen.dart';
 
 class QuestionScreenViewModel extends ChangeNotifier {
   BaseQuestion baseQuestion = BaseQuestion();
@@ -21,13 +21,15 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   updateSelectedOptions(int index) {
     debugPrint(answer);
+    // saveAnswer();
+    // notifyListeners();
     baseQuestion.answered(index);
     notifyListeners();
   }
 
   saveAnswer() {
     if (options != null) {
-      answers.add(answer ?? 'Nothing');
+      answers.add(answer.toString());
       notifyListeners();
     } else {
       answers.add(typedAnswer);
@@ -45,16 +47,15 @@ class QuestionScreenViewModel extends ChangeNotifier {
   Future<void> nextQuestion(PageController controller, BuildContext context) {
     debugPrint('Debug print $answers');
     if (baseQuestion.questionNumber < baseQuestion.questionLength) {
+      saveAnswer();
+      notifyListeners();
       return controller.animateToPage((baseQuestion.nextQuestion()),
           duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
     } else {
-      return Navigator.push(
+      return Navigator.pushNamed(
         context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            result: answers,
-          ),
-        ),
+        RouteManager.resultPage,
+        arguments: answers,
       );
       // Navigator.pushNamed(context, RouteManager.resultPage);
       // baseQuestion.questionModel.length;
