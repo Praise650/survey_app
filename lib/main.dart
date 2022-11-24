@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'Navigation/route.dart';
 import 'ui/screens/question_page/view_model/question_screen_view_model.dart';
 import 'ui/screens/result_page/view_model/result_screen_view_model.dart';
-import 'ui/screens/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
