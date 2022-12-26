@@ -21,8 +21,6 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   updateSelectedOptions(int index) {
     debugPrint(answer);
-    // saveAnswer();
-    // notifyListeners();
     baseQuestion.answered(index);
     notifyListeners();
   }
@@ -41,7 +39,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   previousQuestion(PageController controller) {
     return controller.animateToPage((baseQuestion.previousQuestion()),
-        duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
+        duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
   }
 
   Future<void> nextQuestion(PageController controller, BuildContext context) {
@@ -57,7 +55,6 @@ class QuestionScreenViewModel extends ChangeNotifier {
         RouteManager.resultPage,
         arguments: answers,
       );
-      // Navigator.pushNamed(context, RouteManager.resultPage);
       // baseQuestion.questionModel.length;
     }
   }

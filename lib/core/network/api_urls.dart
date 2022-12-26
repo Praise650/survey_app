@@ -1,5 +1,5 @@
-//////// api website and doc
-//////// https://opentdb.com/api_config.php
+/// api website and doc
+/// https://opentdb.com/api_config.php
 
 class APIUrl {
   static const stagingUrl =

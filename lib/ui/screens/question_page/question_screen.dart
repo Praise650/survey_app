@@ -34,11 +34,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
               return await model.previousQuestion(controller!);
             } else if (model.currentQuestion == 0) {
               return await showDialog(
-                    context: context,
-                    builder: (context) => Container(
-                      color: Colors.red,
-                    ),
-                  ) ??
+                      context: context,
+                      builder: (context) => Container(
+                            color: Colors.red,
+                          )) ??
                   false;
             } else {
               return false;
@@ -119,10 +118,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       ),
                     ),
                     BaseButton(
-                      onPress: () {
-                        model.nextQuestion(controller!, context);
-                        // model.saveAnswer();
-                      },
+                      onPress: () => model.nextQuestion(
+                        controller!,
+                        context,
+                      ),
                     ),
                   ],
                 ),

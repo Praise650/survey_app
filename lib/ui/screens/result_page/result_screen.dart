@@ -16,12 +16,12 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  PageController? controller;
+  // PageController? controller;
 
   @override
   initState() {
     super.initState();
-    controller = PageController();
+    // controller = PageController();
   }
 
   @override
