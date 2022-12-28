@@ -59,7 +59,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       decoration: BoxDecoration(
                           color: model.currentQuestion == 1
                               ? Colors.grey
-                              : Colors.yellow,
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton.icon(
                         onPressed: () => model.previousQuestion(controller!),
@@ -104,9 +104,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                               color: Colors.blue,
                                             ),
                                           ),
-                                          onSaved: (value) {
-                                            setState(() => model.typedAnswer =
-                                                value ?? 'Default Answer');
+                                          onChanged: (value) => setState(
+                                              () => model.typedAnswer = value),
+                                          onEditingComplete: () {
+                                            model.saveAnswer();
                                           },
                                         ),
                                       ],
@@ -118,6 +119,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       ),
                     ),
                     BaseButton(
+                      bgColor: Colors.white,
                       onPress: () => model.nextQuestion(
                         controller!,
                         context,

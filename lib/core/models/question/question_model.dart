@@ -2,22 +2,23 @@ import 'package:survey_app/core/models/question/question_bank.dart';
 
 class QuestionModel {
   final String? question;
-  final String? answer;
+  String? answer;
   final List<String>? options;
-  int? answered;
 
-  String? getAnswer() => answered != null ? options![answered ?? 0] : null;
+  // int? answerIndex;
+
+  // String? getAnswer() => answerIndex != null ? options![answerIndex ?? 0] : null;
 
   QuestionModel({
     this.question,
     this.answer,
     this.options,
-    this.answered,
+    // this.answerIndex,
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
         options: json['options'],
-        answered: json['answered'],
+    // answerIndex: json['answered'],
         answer: json['answer'],
         question: json['question'],
       );
