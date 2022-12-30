@@ -65,11 +65,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         onPressed: () => model.previousQuestion(controller!),
                         icon: const Icon(
                           Icons.chevron_left,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                         label: const Text(
                           'Previous',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),

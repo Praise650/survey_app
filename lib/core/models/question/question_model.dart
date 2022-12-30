@@ -4,6 +4,7 @@ class QuestionModel {
   final String? question;
   String? answer;
   final List<String>? options;
+  final bool isLocked;
 
   // int? answerIndex;
 
@@ -13,6 +14,7 @@ class QuestionModel {
     this.question,
     this.answer,
     this.options,
+    this.isLocked = false,
     // this.answerIndex,
   });
 

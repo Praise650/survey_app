@@ -3,14 +3,13 @@ import '../models/question/question_model.dart';
 class QuestionService {
   final List<QuestionModel> _questionModel = QuestionModel.generalQuestionDummy;
 
-  int? _currentOptionsIndex;
   int _questionNumber = 0;
 
   /// getters
   /// questions and options getter
   int get questionNumber => _questionNumber + 1;
 
-  int? get currentOptionIndex => _currentOptionsIndex;
+  // int? get currentOptionIndex => _currentOptionsIndex;
 
   ///gets list of questions and options
   List get questionModel => _questionModel;
@@ -25,13 +24,13 @@ class QuestionService {
   ///get question at index
   String? get question => _questionModel[_questionNumber].question;
 
-  ///get selected answer
-  // String? get getAnswer => _questionModel[_questionNumber].getAnswer();
+  ///get next question
+  int get nextQuestion => questionNumber++;
 
   /// set question & option index
   set questionNumber(int number) => _questionNumber = number;
 
-  set optionNumber(int number) => _currentOptionsIndex = number;
+  // set optionNumber(int number) => _currentOptionsIndex = number;
 
   /// get selected answer at option index
   String? selectedAnswered(String pickedAnswer) =>
@@ -44,6 +43,4 @@ class QuestionService {
       return _questionNumber;
     }
   }
-
-  int nextQuestion() => questionNumber++;
 }

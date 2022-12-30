@@ -7,8 +7,9 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   List<String> answers = [];
 
-  ///store selected answer
-  // String? get answer => baseQuestion.getAnswer;
+  int? _currentOptionIndex;
+
+  ///store typed answer
   String? typedAnswer = '';
 
   String? get question => baseQuestion.question;
@@ -19,15 +20,19 @@ class QuestionScreenViewModel extends ChangeNotifier {
 
   int get optionLength => baseQuestion.optionsLength!;
 
+  int? get currentOptionIndex => _currentOptionIndex;
+
   updateSelectedAnswer(int index) {
-    baseQuestion.optionNumber = index;
+    _currentOptionIndex = index;
     if (options != null) {
-      String? pickedAnswer = baseQuestion.selectedAnswered(
-          baseQuestion.options![baseQuestion.currentOptionIndex!]);
+      String? pickedAnswer = baseQuestion
+          .selectedAnswered(baseQuestion.options![_currentOptionIndex!]);
       answers.add(pickedAnswer!);
       notifyListeners();
+      print(
+          "printing current option state on new instance $_currentOptionIndex");
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   saveAnswer() {
@@ -35,10 +40,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
       answers.add(typedAnswer!);
       notifyListeners();
     }
-    notifyListeners();
   }
-
-  int? get currentOptionIndex => baseQuestion.currentOptionIndex;
 
   previousQuestion(PageController controller) {
     return controller.animateToPage((baseQuestion.previousQuestion()),
@@ -48,7 +50,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
   Future<void> nextQuestion(PageController controller, BuildContext context) {
     debugPrint('Debug print $answers');
     if (baseQuestion.questionNumber < baseQuestion.questionLength) {
-      return controller.animateToPage((baseQuestion.nextQuestion()),
+      return controller.animateToPage(baseQuestion.nextQuestion,
           duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
     } else {
       return Navigator.pushNamed(
