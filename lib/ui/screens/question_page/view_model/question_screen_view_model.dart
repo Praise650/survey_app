@@ -1,59 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:survey_app/Navigation/route.dart';
+import 'package:survey_app/core/models/option_model.dart';
+import 'package:survey_app/core/models/question/question_model.dart';
 import '../../../../core/services/question_services.dart';
 
 class QuestionScreenViewModel extends ChangeNotifier {
-  QuestionService baseQuestion = QuestionService();
+  final QuestionService _questionService = QuestionService();
 
-  List<String> answers = [];
+  /// gets list of questions
+  List<QuestionModel> get questions => _questionService.questions;
 
-  int? _currentOptionIndex;
+  List<OptionModel> answers = [];
 
   ///store typed answer
-  String? typedAnswer = '';
+  OptionModel? answer;
 
-  String? get question => baseQuestion.question;
+  /// get current question Number and current option index
+  int get currentQuestionNumber => _questionService.currentQuestionNumber;
 
-  int get currentQuestion => baseQuestion.questionNumber;
+  int get questionNumber => _questionService.questionNumber;
 
-  List<String>? get options => baseQuestion.options;
+  /// get length of questions ans options
+  int? get optionLength => _questionService.optionsLength;
 
-  int get optionLength => baseQuestion.optionsLength!;
+  int get questionLength => _questionService.questionLength;
 
-  int? get currentOptionIndex => _currentOptionIndex;
-
-  updateSelectedAnswer(int index) {
-    _currentOptionIndex = index;
-    if (options != null) {
-      String? pickedAnswer = baseQuestion
-          .selectedAnswered(baseQuestion.options![_currentOptionIndex!]);
-      answers.add(pickedAnswer!);
-      notifyListeners();
-      print(
-          "printing current option state on new instance $_currentOptionIndex");
+  updateSelectedAnswer(OptionModel option) {
+    if (_questionService.isLocked == true) {
+    } else {
+      _questionService.islocked = true;
+      _questionService.setAnswer = option;
+      answer = option;
       notifyListeners();
     }
   }
 
-  saveAnswer() {
-    if (typedAnswer != null) {
-      answers.add(typedAnswer!);
+  saveAnswer(OptionModel? value) {
+    if (value != null) {
+      answers.add(value);
+      notifyListeners();
+    } else {
+      final _typedVale = OptionModel(text: "No Answered");
+      answers.add(_typedVale);
       notifyListeners();
     }
   }
 
   previousQuestion(PageController controller) {
-    return controller.animateToPage((baseQuestion.previousQuestion()),
+    return controller.animateToPage((_questionService.previousQuestion()),
         duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
   }
 
-  Future<void> nextQuestion(PageController controller, BuildContext context) {
-    debugPrint('Debug print $answers');
-    if (baseQuestion.questionNumber < baseQuestion.questionLength) {
-      return controller.animateToPage(baseQuestion.nextQuestion,
+  nextQuestion(PageController controller, BuildContext context) {
+    if (questionNumber < questionLength) {
+      saveAnswer(answer);
+      controller.animateToPage(_questionService.nextQuestion,
           duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
+      debugPrint('Debug print $answers');
     } else {
-      return Navigator.pushNamed(
+      Navigator.pushReplacementNamed(
         context,
         RouteManager.resultPage,
         arguments: answers,
@@ -62,7 +67,7 @@ class QuestionScreenViewModel extends ChangeNotifier {
   }
 
   void updateQuestion(int value) {
-    baseQuestion.questionNumber = value;
+    _questionService.setQuestionNumber = value;
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:survey_app/core/models/option_model.dart';
 import 'package:survey_app/ui/layouts/base_scaffold.dart';
 import 'package:survey_app/ui/styles/dimens.dart';
 import 'package:survey_app/ui/widgets/buttons/base_button.dart';
@@ -9,7 +10,7 @@ import 'view_model/result_screen_view_model.dart';
 
 class ResultScreen extends StatefulWidget {
   const ResultScreen({Key? key, this.result}) : super(key: key);
-  final List<String>? result;
+  final List<OptionModel>? result;
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -57,16 +58,19 @@ class _ResultScreenState extends State<ResultScreen> {
                             Text(
                               '${index + 1}.',
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 24,
                                 color: Colors.white,
                               ),
                             ),
                             const SizedBox(width: 10),
-                            Text(
-                              widget.result![index],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                            Expanded(
+                              child: Text(
+                                widget.result![index].text.toString(),
+                                softWrap: true,
+                                style: const TextStyle(
+                                  fontSize: 34,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],

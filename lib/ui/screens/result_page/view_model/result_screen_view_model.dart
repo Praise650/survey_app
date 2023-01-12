@@ -4,7 +4,7 @@ import '../../../../Navigation/route.dart';
 
 class ResultScreenViewModel extends ChangeNotifier {
   navigateToHomePage(BuildContext context) {
-    Navigator.pushReplacementNamed(context, RouteManager.homePage);
+    Navigator.popAndPushNamed(context, RouteManager.homePage);
     //TODO: implement emptying the list
   }
 }

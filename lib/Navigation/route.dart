@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_app/core/models/option_model.dart';
 import 'package:survey_app/ui/screens/homepage/homepage.dart';
 import 'package:survey_app/ui/screens/question_page/question_screen.dart';
 import 'package:survey_app/ui/screens/result_page/result_screen.dart';
@@ -28,7 +29,7 @@ class RouteManager {
       case resultPage:
         return MaterialPageRoute(
           builder: (context) => ResultScreen(
-            result: settings.arguments as List<String>?,
+            result: settings.arguments as List<OptionModel>?,
           ),
           settings: settings,
         );

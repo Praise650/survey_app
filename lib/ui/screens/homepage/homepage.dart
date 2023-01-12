@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_app/ui/layouts/base_scaffold.dart';
 import 'package:survey_app/ui/layouts/base_scaffold_body.dart';
-import 'package:survey_app/ui/screens/question_page/question_screen.dart';
 import 'package:survey_app/ui/widgets/survey_type_widget.dart';
+
+import '../../../Navigation/route.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -28,11 +29,9 @@ class Homepage extends StatelessWidget {
                 const SizedBox(height: 50),
                 SurveyTypeWidget(
                   url: url,
-                  onPress: () => Navigator.push(
+                  onPress: () => Navigator.popAndPushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const QuestionScreen(),
-                    ),
+                    RouteManager.questionPage,
                   ),
                 ),
                 const SurveyTypeWidget(
@@ -40,35 +39,55 @@ class Homepage extends StatelessWidget {
                   label: 'Quiz',
                   subtitle: 'Answer questions to test your knowledge',
                 ),
-                const SurveyTypeWidget(
+                SurveyTypeWidget(
                   url: url,
                   label: 'Health',
                   subtitle:
                       'Answer questions related to Health to test your knowledge',
+                  onPress: () => Navigator.popAndPushNamed(
+                    context,
+                    RouteManager.questionPage,
+                  ),
                 ),
-                const SurveyTypeWidget(
+                SurveyTypeWidget(
                   url: url,
                   label: 'Sport',
                   subtitle:
                       'Answer questions related to Sports to test your knowledge',
+                  onPress: () => Navigator.popAndPushNamed(
+                    context,
+                    RouteManager.questionPage,
+                  ),
                 ),
-                const SurveyTypeWidget(
+                SurveyTypeWidget(
                   url: url,
                   label: 'Finance',
                   subtitle:
                       'Answer questions related to Finance to test your knowledge',
+                  onPress: () => Navigator.popAndPushNamed(
+                    context,
+                    RouteManager.questionPage,
+                  ),
                 ),
-                const SurveyTypeWidget(
+                SurveyTypeWidget(
                   url: url,
                   label: 'Entertainment',
                   subtitle:
                       'Answer questions related to entertainment to test your knowledge',
+                  onPress: () => Navigator.popAndPushNamed(
+                    context,
+                    RouteManager.questionPage,
+                  ),
                 ),
-                const SurveyTypeWidget(
+                SurveyTypeWidget(
                   url: url,
                   label: 'Entertainment',
                   subtitle:
                       'Answer questions related to entertainment to test your knowledge',
+                  onPress: () => Navigator.popAndPushNamed(
+                    context,
+                    RouteManager.questionPage,
+                  ),
                 ),
               ],
             ),

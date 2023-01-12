@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:survey_app/core/models/question/question_model.dart';
 
 class QuestionWidget extends StatelessWidget {
   final int currentQuestion;
 
   final int totalQuestion;
 
-  final String question;
+  final QuestionModel model;
 
   const QuestionWidget({
     Key? key,
     required this.currentQuestion,
     required this.totalQuestion,
-    required this.question,
+    required this.model,
   }) : super(key: key);
 
   @override
@@ -30,7 +31,7 @@ class QuestionWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          question.toString(),
+          model.question.toString(),
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,

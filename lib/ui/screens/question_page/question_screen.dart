@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:survey_app/ui/layouts/base_scaffold.dart';
 import 'package:survey_app/ui/styles/dimens.dart';
 import 'package:survey_app/ui/widgets/buttons/base_button.dart';
+import 'package:survey_app/ui/widgets/input.dart';
 
 import '../../widgets/option_box.dart';
 import '../../widgets/question_widget.dart';
@@ -30,14 +31,16 @@ class _QuestionScreenState extends State<QuestionScreen> {
       builder: (context, model, child) {
         return WillPopScope(
           onWillPop: () async {
-            if (model.currentQuestion != 0) {
+            if (model.questionNumber != 0) {
               return await model.previousQuestion(controller!);
-            } else if (model.currentQuestion == 0) {
+            } else if (model.questionNumber == 0) {
               return await showDialog(
-                      context: context,
-                      builder: (context) => Container(
-                            color: Colors.red,
-                          )) ??
+                    context: context,
+                    builder: (context) => const AlertDialog(
+                      backgroundColor: Colors.white,
+                      title: Text("Do you want to quit soorvaay"),
+                    ),
+                  ) ??
                   false;
             } else {
               return false;
@@ -57,7 +60,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: model.currentQuestion == 1
+                          color: model.currentQuestionNumber == 1
                               ? Colors.grey
                               : Colors.white,
                           borderRadius: BorderRadius.circular(10)),
@@ -76,43 +79,23 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     Expanded(
                       child: PageView.builder(
                         onPageChanged: (value) => model.updateQuestion(value),
-                        itemCount: model.baseQuestion.questionLength,
+                        itemCount: model.questionLength,
                         controller: controller,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
                               QuestionWidget(
-                                currentQuestion: model.currentQuestion,
-                                totalQuestion:
-                                    model.baseQuestion.questionLength,
-                                question: model.question.toString(),
+                                currentQuestion: model.currentQuestionNumber,
+                                totalQuestion: model.questionLength,
+                                model: model.questions[index],
                               ),
-                              model.options == null
-                                  ? Column(
-                                      children: [
-                                        TextFormField(
-                                          decoration: const InputDecoration(
-                                            hintText: 'Type your answer here',
-                                            hintStyle: TextStyle(
-                                              color: Colors.blue,
-                                            ),
-                                            fillColor: Colors.white,
-                                            filled: true,
-                                            labelText: 'Type your answer here',
-                                            labelStyle: TextStyle(
-                                              color: Colors.blue,
-                                            ),
-                                          ),
-                                          onChanged: (value) => setState(
-                                              () => model.typedAnswer = value),
-                                          onEditingComplete: () {
-                                            model.saveAnswer();
-                                          },
-                                        ),
-                                      ],
-                                    )
-                                  : const OptionBox(),
+                              model.questions[index].options == null
+                                  ? Expanded(child: GeneralInput(model: model))
+                                  : OptionWidget(
+                                      question: model.questions[index],
+                                      // model: model,
+                                    ),
                             ],
                           );
                         },
@@ -120,10 +103,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                     BaseButton(
                       bgColor: Colors.white,
-                      onPress: () => model.nextQuestion(
-                        controller!,
-                        context,
-                      ),
+                      onPress: () => model.nextQuestion(controller!, context),
                     ),
                   ],
                 ),

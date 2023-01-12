@@ -1,27 +1,23 @@
 import 'package:survey_app/core/models/question/question_bank.dart';
 
+import '../option_model.dart';
+
 class QuestionModel {
-  final String? question;
-  String? answer;
-  final List<String>? options;
-  final bool isLocked;
-
-  // int? answerIndex;
-
-  // String? getAnswer() => answerIndex != null ? options![answerIndex ?? 0] : null;
+  final String question;
+  OptionModel? selectedAnswer;
+  final List<OptionModel?>? options;
+  bool isLocked;
 
   QuestionModel({
-    this.question,
-    this.answer,
+    required this.question,
+    this.selectedAnswer,
     this.options,
     this.isLocked = false,
-    // this.answerIndex,
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
         options: json['options'],
-    // answerIndex: json['answered'],
-        answer: json['answer'],
+        selectedAnswer: json['answer'],
         question: json['question'],
       );
 

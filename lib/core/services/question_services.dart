@@ -1,40 +1,39 @@
+import '../models/option_model.dart';
 import '../models/question/question_model.dart';
 
 class QuestionService {
-  final List<QuestionModel> _questionModel = QuestionModel.generalQuestionDummy;
+  final List<QuestionModel> _questions = QuestionModel.generalQuestionDummy;
 
   int _questionNumber = 0;
 
   /// getters
-  /// questions and options getter
-  int get questionNumber => _questionNumber + 1;
+  /// questions
+  int get currentQuestionNumber => _questionNumber + 1;
 
-  // int? get currentOptionIndex => _currentOptionsIndex;
+  int get questionNumber => _questionNumber;
 
-  ///gets list of questions and options
-  List get questionModel => _questionModel;
-
-  List<String>? get options => _questionModel[_questionNumber].options;
+  ///gets list of questions
+  List<QuestionModel> get questions => _questions;
 
   /// gets lengths of questions and (options at index)
-  int get questionLength => _questionModel.length;
+  int get questionLength => _questions.length;
 
-  int? get optionsLength => _questionModel[_questionNumber].options?.length;
+  int? get optionsLength => _questions[_questionNumber].options?.length;
 
-  ///get question at index
-  String? get question => _questionModel[_questionNumber].question;
+  /// get answered state
+  bool get isLocked => _questions[_questionNumber].isLocked;
 
   ///get next question
-  int get nextQuestion => questionNumber++;
+  int get nextQuestion => ++_questionNumber;
 
   /// set question & option index
-  set questionNumber(int number) => _questionNumber = number;
+  set setQuestionNumber(int number) => _questionNumber = number;
 
-  // set optionNumber(int number) => _currentOptionsIndex = number;
+  set islocked(bool value) => _questions[_questionNumber].isLocked = value;
 
-  /// get selected answer at option index
-  String? selectedAnswered(String pickedAnswer) =>
-      _questionModel[_questionNumber].answer = pickedAnswer;
+  /// set selected Answer
+  set setAnswer(OptionModel answer) =>
+      _questions[_questionNumber].selectedAnswer = answer;
 
   int previousQuestion() {
     if (_questionNumber != 0) {
