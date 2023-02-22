@@ -1,35 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:survey_app/Navigation/route.dart';
 import 'package:survey_app/core/models/option_model.dart';
-import 'package:survey_app/core/models/question/question_model.dart';
-import '../../../../core/services/question_services.dart';
+import '../../../../core/models/question/question_bank.dart';
+// import '../../../../core/services/question_services.dart';
 
 class QuestionScreenViewModel extends ChangeNotifier {
-  final QuestionService _questionService = QuestionService();
+  QuestionBank questionService = QuestionBank();
 
-  /// gets list of questions
-  List<QuestionModel> get questions => _questionService.questions;
+  TextEditingController answerController = TextEditingController();
 
-  List<OptionModel> answers = [];
+  int _questionNumber = 0;
+
+  /// getters
+  /// get current question Number and current option index
+  int get questionNumber => ++_questionNumber;
+
+  /// get length of questions and (options at index)
+  int get questionLength => questionService.generalQuestions.length;
+
+  /// get answered state
+  bool get isLocked =>
+      questionService.generalQuestions[_questionNumber].isLocked;
+
+  ///setters
+  /// set question & option index
+  set updateQuestion(int number) => _questionNumber = number;
+
+  /// lock selected answer
+  set islocked(bool value) =>
+      questionService.generalQuestions[_questionNumber].isLocked = value;
+
+  /// set selected Answer
+  set setAnswer(OptionModel answer) =>
+      questionService.generalQuestions[_questionNumber].selectedAnswer = answer;
 
   ///store typed answer
   OptionModel? answer;
 
-  /// get current question Number and current option index
-  int get currentQuestionNumber => _questionService.currentQuestionNumber;
+  List<OptionModel> answers = [];
 
-  int get questionNumber => _questionService.questionNumber;
-
-  /// get length of questions ans options
-  int? get optionLength => _questionService.optionsLength;
-
-  int get questionLength => _questionService.questionLength;
+  saveTypedAnswer(String? value) {
+    if (value != null) {
+      OptionModel _typedVale = OptionModel(text: value);
+      answer = _typedVale;
+      notifyListeners();
+    } else {
+      OptionModel _typedVale = OptionModel(text: "No Answer");
+      answer = _typedVale;
+      notifyListeners();
+    }
+  }
 
   updateSelectedAnswer(OptionModel option) {
-    if (_questionService.isLocked == true) {
+    if (isLocked == true) {
     } else {
-      _questionService.islocked = true;
-      _questionService.setAnswer = option;
+      islocked = true;
+      setAnswer = option;
       answer = option;
       notifyListeners();
     }
@@ -46,17 +72,29 @@ class QuestionScreenViewModel extends ChangeNotifier {
     }
   }
 
+  int _previousQuestion() {
+    if (_questionNumber != 0) {
+      return --_questionNumber;
+    } else {
+      return _questionNumber;
+    }
+  }
+
   previousQuestion(PageController controller) {
-    return controller.animateToPage((_questionService.previousQuestion()),
-        duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
+    if (isLocked != true) {
+      return controller.animateToPage((_previousQuestion()),
+          duration: const Duration(milliseconds: 200), curve: Curves.bounceIn);
+    } else {
+      return;
+    }
   }
 
   nextQuestion(PageController controller, BuildContext context) {
-    if (questionNumber < questionLength) {
+    if (_questionNumber < questionLength) {
       saveAnswer(answer);
-      controller.animateToPage(_questionService.nextQuestion,
+      controller.animateToPage(++_questionNumber,
           duration: const Duration(milliseconds: 20), curve: Curves.bounceIn);
-      debugPrint('Debug print $answers');
+      debugPrint('Debug print ${answer!.text}');
     } else {
       Navigator.pushReplacementNamed(
         context,
@@ -64,10 +102,5 @@ class QuestionScreenViewModel extends ChangeNotifier {
         arguments: answers,
       );
     }
-  }
-
-  void updateQuestion(int value) {
-    _questionService.setQuestionNumber = value;
-    notifyListeners();
   }
 }

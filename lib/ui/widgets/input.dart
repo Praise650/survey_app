@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:survey_app/ui/screens/question_page/view_model/question_screen_view_model.dart';
+import 'package:provider/provider.dart';
 
-import '../../core/models/option_model.dart';
+import '../screens/question_page/view_model/question_screen_view_model.dart';
 
 class GeneralInput extends StatefulWidget {
-  const GeneralInput({Key? key, required this.model}) : super(key: key);
-
-  final QuestionScreenViewModel model;
+  const GeneralInput({
+    Key? key,
+    this.onChanged,
+    this.validator,
+    this.controller,
+  }) : super(key: key);
+  final Function(String)? onChanged;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
 
   @override
   State<GeneralInput> createState() => _GeneralInputState();
@@ -15,7 +21,9 @@ class GeneralInput extends StatefulWidget {
 class _GeneralInputState extends State<GeneralInput> {
   @override
   Widget build(BuildContext context) {
+    final model = context.read<QuestionScreenViewModel>();
     return TextFormField(
+      controller: widget.controller,
       decoration: const InputDecoration(
         hintText: 'Type your answer here',
         hintStyle: TextStyle(
@@ -28,10 +36,15 @@ class _GeneralInputState extends State<GeneralInput> {
           color: Colors.blue,
         ),
       ),
-      onChanged: (value) {
-        OptionModel _typedVale = OptionModel(text: value);
-        setState(() => widget.model.answer = _typedVale);
-      },
+      onChanged: widget.onChanged ?? (value) => model.saveTypedAnswer(value),
+      validator: widget.validator ??
+          (value) {
+            if (value!.isEmpty) {
+              return 'Please enter some text';
+            } else {
+              return null;
+            }
+          },
       // onEditingComplete: () {
       //   widget.model.saveAnswer(widget.model.answer);
       // },

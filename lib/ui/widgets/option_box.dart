@@ -7,25 +7,20 @@ import 'package:survey_app/ui/screens/question_page/view_model/question_screen_v
 class OptionWidget extends StatelessWidget {
   final QuestionModel question;
 
-  // final QuestionScreenViewModel model;
-
-  const OptionWidget({
-    Key? key,
-    required this.question,
-    // required this.model,
-  }) : super(key: key);
+  const OptionWidget({Key? key, required this.question}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<QuestionScreenViewModel>(context);
     return Column(
       children: List.generate(
-        model.optionLength ?? 0,
+        question.options!.length,
         (index) => OptionBox(
           option: question.options![index]!,
           isLocked: question.isLocked,
           selectedAnswer: question.selectedAnswer,
-          onTap: (option) => model.updateSelectedAnswer(option),
+          onTap: (option) => context
+              .read<QuestionScreenViewModel>()
+              .updateSelectedAnswer(option),
         ),
       ),
     );

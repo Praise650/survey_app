@@ -5,6 +5,7 @@ import 'package:survey_app/ui/styles/dimens.dart';
 import 'package:survey_app/ui/widgets/buttons/base_button.dart';
 import 'package:survey_app/ui/widgets/input.dart';
 
+import '../../widgets/buttons/back_button.dart';
 import '../../widgets/option_box.dart';
 import '../../widgets/question_widget.dart';
 import 'view_model/question_screen_view_model.dart';
@@ -26,22 +27,42 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<QuestionScreenViewModel>(
       builder: (context, model, child) {
         return WillPopScope(
           onWillPop: () async {
-            if (model.questionNumber != 0) {
+            if (model.questionNumber != 1) {
               return await model.previousQuestion(controller!);
-            } else if (model.questionNumber == 0) {
+            } else if (model.questionNumber == 1) {
+              bool maybepop = false;
               return await showDialog(
-                    context: context,
-                    builder: (context) => const AlertDialog(
-                      backgroundColor: Colors.white,
-                      title: Text("Do you want to quit soorvaay"),
-                    ),
-                  ) ??
-                  false;
+                      context: context,
+                      builder: (context) => AlertDialog(
+                              backgroundColor: Colors.white,
+                              title: const Text("Do you want to quit soorvaay"),
+                              buttonPadding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              actions: [
+                                InkWell(
+                                  onTap: () => Navigator.pop(context),
+                                  child: const Text("No"),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    setState(() => maybepop = true);
+                                  },
+                                  child: const Text("Yes"),
+                                )
+                              ])) ??
+                  maybepop;
             } else {
               return false;
             }
@@ -58,9 +79,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // BackButtonWidget(
+                    //   controller: controller!,
+                    //   onPress:()=> model.previousQuestion(controller!),
+                    //   questionNumber: model.questionNumber,
+                    // ),
                     Container(
                       decoration: BoxDecoration(
-                          color: model.currentQuestionNumber == 1
+                          color: model.questionNumber == 1
                               ? Colors.grey
                               : Colors.white,
                           borderRadius: BorderRadius.circular(10)),
@@ -78,7 +104,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                     Expanded(
                       child: PageView.builder(
-                        onPageChanged: (value) => model.updateQuestion(value),
+                        onPageChanged: (value) =>
+                            model.updateQuestion = (value),
                         itemCount: model.questionLength,
                         controller: controller,
                         physics: const NeverScrollableScrollPhysics(),
@@ -86,15 +113,21 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           return Column(
                             children: [
                               QuestionWidget(
-                                currentQuestion: model.currentQuestionNumber,
+                                currentQuestion: index + 1,
                                 totalQuestion: model.questionLength,
-                                model: model.questions[index],
+                                question: model.questionService
+                                    .generalQuestions[index].question!,
                               ),
-                              model.questions[index].options == null
-                                  ? Expanded(child: GeneralInput(model: model))
+                              model.questionService.generalQuestions[index]
+                                          .options ==
+                                      null
+                                  ? const Expanded(
+                                      child: GeneralInput(
+                                          // controller: model.answerController,
+                                          ))
                                   : OptionWidget(
-                                      question: model.questions[index],
-                                      // model: model,
+                                      question: model.questionService
+                                          .generalQuestions[index],
                                     ),
                             ],
                           );
@@ -114,9 +147,38 @@ class _QuestionScreenState extends State<QuestionScreen> {
       },
     );
   }
-}
 
-// Future<bool> onWillPop(BuildContext context, {required QuestionScreenViewModel model, required PageController controller,}) async {
-//    return (await (model.previousQuestion(controller)) Navigator.pop(context);) ??
-//       false;
+// Future<bool> onWillPop(
+//   QuestionScreenViewModel model,
+// ) async {
+//   if (model.questionNumber != 1) {
+//     return await model.previousQuestion(controller!);
+//   } else if (model.questionNumber == 1) {
+//     bool maybepop = false;
+//     return await showDialog(
+//           context: context,
+//           builder: (context) => AlertDialog(
+//             backgroundColor: Colors.white,
+//             title: const Text("Do you want to quit soorvaay"),
+//             buttonPadding: const EdgeInsets.symmetric(horizontal: 20),
+//             actions: [
+//               InkWell(
+//                 onTap: () => Navigator.pop(context),
+//                 child: const Text("No"),
+//               ),
+//               InkWell(
+//                 onTap: () {
+//                   Navigator.pop(context);
+//                   setState(() => maybepop = true);
+//                 },
+//                 child: const Text("Yes"),
+//               )
+//             ],
+//           ),
+//         ) ??
+//         maybepop;
+//   } else {
+//     return false;
+//   }
 // }
+}

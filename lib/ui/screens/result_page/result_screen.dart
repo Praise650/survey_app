@@ -48,34 +48,38 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                   ),
                 ),
-                Column(
-                  children: List.generate(
-                    widget.result!.length,
-                    (index) => Column(
-                      children: [
-                        Row(
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: List.generate(
+                        widget.result!.length,
+                        (index) => Column(
                           children: [
-                            Text(
-                              '${index + 1}.',
-                              style: const TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                widget.result![index].text.toString(),
-                                softWrap: true,
-                                style: const TextStyle(
-                                  fontSize: 34,
-                                  color: Colors.white,
+                            Row(
+                              children: [
+                                Text(
+                                  '${index + 1}.',
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    widget.result![index].text.toString(),
+                                    softWrap: true,
+                                    style: const TextStyle(
+                                      fontSize: 34,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

@@ -2,7 +2,7 @@ import '../option_model.dart';
 import 'question_model.dart';
 
 class QuestionBank {
-  static List<QuestionModel> generalQuestions = [
+  List<QuestionModel> generalQuestions = [
     QuestionModel(
       question: 'What is your favourite sport',
       options: [
@@ -86,7 +86,7 @@ class QuestionBank {
     ),
   ];
 
-  static List<QuestionModel> healthQuestion = [
+  List<QuestionModel> healthQuestion = [
     QuestionModel(
       question: 'Employment Status of respondent:',
       options: [

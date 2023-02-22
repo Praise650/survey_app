@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:survey_app/ui/layouts/base_scaffold.dart';
 import 'package:survey_app/ui/layouts/base_scaffold_body.dart';
+import 'package:survey_app/ui/screens/question_page/view_model/question_screen_view_model.dart';
 import 'package:survey_app/ui/widgets/survey_type_widget.dart';
 
 import '../../../Navigation/route.dart';
+import '../../../core/models/question/question_bank.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -14,6 +17,16 @@ class Homepage extends StatelessWidget {
     const String url =
         "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/3/21/1395401774125"
         "/Lorem-ipsum-011.jpg?width=620&quality=85&fit=max&s=48a5c92436d831392306b23d62875a7c";
+
+    navigateToQuestionPage() {
+      context.read<QuestionScreenViewModel>().questionService = QuestionBank();
+      print(context.read<QuestionScreenViewModel>().questionService);
+      Navigator.pushNamed(
+        context,
+        RouteManager.questionPage,
+      );
+    }
+
     return SafeArea(
       child: BaseScaffold(
         body: Container(
@@ -29,10 +42,7 @@ class Homepage extends StatelessWidget {
                 const SizedBox(height: 50),
                 SurveyTypeWidget(
                   url: url,
-                  onPress: () => Navigator.popAndPushNamed(
-                    context,
-                    RouteManager.questionPage,
-                  ),
+                  onPress: () => navigateToQuestionPage(),
                 ),
                 const SurveyTypeWidget(
                   url: url,
@@ -44,20 +54,14 @@ class Homepage extends StatelessWidget {
                   label: 'Health',
                   subtitle:
                       'Answer questions related to Health to test your knowledge',
-                  onPress: () => Navigator.popAndPushNamed(
-                    context,
-                    RouteManager.questionPage,
-                  ),
+                  onPress: () => navigateToQuestionPage(),
                 ),
                 SurveyTypeWidget(
                   url: url,
                   label: 'Sport',
                   subtitle:
                       'Answer questions related to Sports to test your knowledge',
-                  onPress: () => Navigator.popAndPushNamed(
-                    context,
-                    RouteManager.questionPage,
-                  ),
+                  onPress: () => navigateToQuestionPage(),
                 ),
                 SurveyTypeWidget(
                   url: url,
